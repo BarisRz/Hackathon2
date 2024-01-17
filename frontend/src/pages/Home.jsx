@@ -1,4 +1,5 @@
 import Product from "../components/Product";
+import dataProduct from "../data/data.json";
 import "../styles/home.scss";
 
 function Home() {
@@ -28,11 +29,9 @@ function Home() {
           </div>
         </aside>
         <div className="flex-[3] flex flex-wrap">
-          <Product />
-          <Product />
-          <Product />
-          <Product />
-          <Product />
+          {dataProduct.map((product) => (
+            <Product product={product} key={product.id} />
+          ))}
         </div>
       </div>
     </div>
