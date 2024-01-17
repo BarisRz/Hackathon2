@@ -1,5 +1,56 @@
+import logo from "../assets/Loreal.png";
+import cart from "../assets/market.png";
+import search from "../assets/search.svg";
+import { Link } from "react-router-dom";
+import "../styles/nav.scss";
+
 function Navbar() {
-  return <nav></nav>;
+  return (
+    <div className="header-wrapper">
+      <div className="header">
+        <p>Besoin d'aide ?</p>
+        <img src={logo} alt="" className="logo" />
+        <ul className="user">
+          <li>Inscription newsletter</li>
+          <li>Mon Compte</li>
+          <li>Mon Panier (0)</li>
+          <img src={cart} alt="" width={20} />
+        </ul>
+      </div>
+      <nav>
+        <ul>
+          <li>
+            <Link className="link">Nos Offres</Link>
+          </li>
+          <li>
+            <Link className="link">MAQUILLAGE</Link>
+          </li>
+          <li>
+            <Link className="link">SOIN</Link>
+          </li>
+          <li>
+            <Link className="link">COLORATION</Link>
+          </li>
+          <li>
+            <Link className="link">CHEVEUX</Link>
+          </li>
+          <li>
+            <Link className="link">HOMME</Link>
+          </li>
+          <li>
+            <Link className="link">SERVICES EXCLUSIFS</Link>
+          </li>
+          <li>
+            <Link className="link">NOS ENGAGEMENTS</Link>
+          </li>
+        </ul>
+        <button type="button">
+          {" "}
+          <img src={search} alt="" width={30} /> Rechercherun produit...
+        </button>
+      </nav>
+    </div>
+  );
 }
 
 export default Navbar;
