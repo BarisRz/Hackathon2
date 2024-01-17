@@ -2,6 +2,8 @@
 @tailwind components;
 @tailwind utilities;
 
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;300;400;500;600;700;800;900&display=swap");
+
 @font-face {
   font-family: "Campton-Bold";
   src: url("../assets/fonts/Campton-BoldDEMO.otf") format("opentype");
@@ -26,4 +28,8 @@
 
 .font-camptonbold {
   font-family: var(--font-bold);
+}
+
+.font-montserrat {
+  font-family: "Montserrat", sans-serif;
 }

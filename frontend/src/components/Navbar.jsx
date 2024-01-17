@@ -1,7 +1,7 @@
+import { Link } from "react-router-dom";
 import logo from "../assets/Loreal.png";
 import cart from "../assets/market.png";
 import search from "../assets/search.svg";
-import { Link } from "react-router-dom";
 import "../styles/nav.scss";
 
 function Navbar() {

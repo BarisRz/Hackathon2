@@ -6,6 +6,7 @@ module.exports = {
       fontFamily: {
         camptonbold: ["Campton-Bold"],
         camptonlight: ["Campton-Light"],
+        montserrat: ["Montserrat"],
       },
     },
   },
