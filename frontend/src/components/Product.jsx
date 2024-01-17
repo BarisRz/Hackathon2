@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import photo from "../assets/content/fragrance1.png";
 import { Rating } from "react-simple-star-rating";
 import { useState } from "react";
@@ -34,12 +35,12 @@ function Product() {
             emptyColor={"#333232"}
           />
           <p className="font-extrabold">14,90€</p>
-          <button
-            type="button"
+          <Link
+            to="/Map"
             className="bg-black text-white p-4 hover:bg-[#e32847] transition w-11/12 font-bold"
           >
             Trouver en magasin
-          </button>
+          </Link>
         </div>
       </div>
     </div>
