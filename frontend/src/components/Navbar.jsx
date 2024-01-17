@@ -47,7 +47,7 @@ function Navbar() {
           <button type="button" className="overflow-hidden">
             {" "}
             <img src={search} alt="" width={30} />{" "}
-            <p>Rechercher un produit...</p>
+            <p className="text-xs">Rechercher un produit...</p>
           </button>
         </div>
       </nav>
