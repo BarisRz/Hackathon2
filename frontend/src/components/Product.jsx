@@ -16,11 +16,10 @@ function Product({ product }) {
       <div className="h-full w-full grid grid-rows-2">
         <img src={photo} alt="produit de beauté" className="mx-auto h-" />
         <div className="flex flex-col justify-end items-center">
-          <p className="font-black">
-            {(console.info(product.productName), product.productName)}
-          </p>
+          <p className="font-black">{product.productName}</p>
+          <p className="font-montserrat font-light">{product.brand}</p>
           <p className="font-montserrat font-light">
-            Parfum de l'abîme hurlant
+            {product.productCategory}
           </p>
 
           <Rating
