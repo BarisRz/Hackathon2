@@ -1,0 +1,63 @@
+.header-wrapper {
+  display: flex;
+  flex-direction: column;
+  font-size: 0.8rem;
+  .header {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    padding-left: 5rem;
+    gap: 10rem;
+    p {
+      flex-grow: 5;
+    }
+    .user {
+      display: flex;
+      gap: 30px;
+      justify-self: right;
+      flex-grow: 2;
+      img {
+        margin-left: -1rem;
+      }
+    }
+    .logo {
+      height: 85px;
+      width: 270px;
+    }
+  }
+  nav {
+    display: flex;
+    background-color: black;
+    height: 3.5rem;
+    align-items: center;
+    justify-content: space-around;
+
+    ul {
+      display: flex;
+      justify-content: space-around;
+      gap: 2.5rem;
+      align-items: center;
+      color: white;
+
+      li {
+        .link {
+          &:hover {
+            color: red;
+          }
+        }
+      }
+    }
+    button {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      background-color: white;
+      height: 2.5rem;
+      width: 14rem;
+      border-radius: 20px;
+      padding: 0 1rem;
+      font-size: 0.8rem;
+    }
+  }
+}
