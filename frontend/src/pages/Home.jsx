@@ -15,14 +15,16 @@ function Home() {
         <aside className="flex-1 flex-col mt-11">
           <div className="font-bold">Nos produits</div>
           <div className="w-10/12 h-[1px] bg-gray-400 m-2" />
-          <div className="text-gray-400 text-sm">
-            <a href="#">Eyeliners et crayons</a>
-          </div>
-          <div className="text-gray-400 text-sm">
-            <a href="#">Sourcils</a>
-          </div>
-          <div className="text-gray-400 text-sm">
-            <a href="#">Ombre à paupières</a>
+          <div className="flex flex-col gap-3 pt-2">
+            <div className="text-gray-400 text-sm">
+              <a href="#">Eyeliners et crayons</a>
+            </div>
+            <div className="text-gray-400 text-sm">
+              <a href="#">Sourcils</a>
+            </div>
+            <div className="text-gray-400 text-sm">
+              <a href="#">Ombre à paupières</a>
+            </div>
           </div>
         </aside>
         <div className="flex-[3] flex flex-wrap">

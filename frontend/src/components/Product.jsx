@@ -24,6 +24,7 @@ function Product() {
             onClick={handleRating}
             className="rating scale-50"
             SVGclassName={"inline-block"}
+            initialValue={3}
             transition
             fillColorArray={[
               "#e22746",
