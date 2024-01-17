@@ -22,7 +22,7 @@ function Product() {
 
           <Rating
             onClick={handleRating}
-            className="rating"
+            className="rating scale-50"
             SVGclassName={"inline-block"}
             transition
             fillColorArray={[
@@ -37,7 +37,7 @@ function Product() {
           <p className="font-extrabold">14,90€</p>
           <Link
             to="/Map"
-            className="bg-black text-white p-4 hover:bg-[#e32847] transition w-11/12 font-bold"
+            className="bg-black text-white mt-2 p-4 hover:bg-[#e32847] text-center transition w-11/12 font-bold"
           >
             Trouver en magasin
           </Link>
