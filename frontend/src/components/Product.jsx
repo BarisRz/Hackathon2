@@ -21,7 +21,7 @@ function Product() {
 
           <Rating
             onClick={handleRating}
-            className="rating"
+            className="rating scale-50"
             SVGclassName={"inline-block"}
             transition
             fillColorArray={[
@@ -33,7 +33,7 @@ function Product() {
             ]}
             emptyColor={"#333232"}
           />
-          <p className="font-extrabold">14,90€</p>
+          <p className="font-extrabold pb-2">14,90€</p>
           <button
             type="button"
             className="bg-black text-white p-4 hover:bg-[#e32847] transition w-11/12 font-bold"

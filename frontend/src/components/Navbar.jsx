@@ -9,7 +9,7 @@ function Navbar() {
     <div className="header-wrapper">
       <div className="header">
         <p>Besoin d'aide ?</p>
-        <img src={logo} alt="" className="logo" />
+        {/* <img src={logo} alt="" className="logo" /> */}
         <ul className="user">
           <li>Inscription newsletter</li>
           <li>Mon Compte</li>
@@ -18,36 +18,39 @@ function Navbar() {
         </ul>
       </div>
       <nav>
-        <ul>
-          <li>
-            <Link className="link">Nos Offres</Link>
-          </li>
-          <li>
-            <Link className="link">MAQUILLAGE</Link>
-          </li>
-          <li>
-            <Link className="link">SOIN</Link>
-          </li>
-          <li>
-            <Link className="link">COLORATION</Link>
-          </li>
-          <li>
-            <Link className="link">CHEVEUX</Link>
-          </li>
-          <li>
-            <Link className="link">HOMME</Link>
-          </li>
-          <li>
-            <Link className="link">SERVICES EXCLUSIFS</Link>
-          </li>
-          <li>
-            <Link className="link">NOS ENGAGEMENTS</Link>
-          </li>
-        </ul>
-        <button type="button">
-          {" "}
-          <img src={search} alt="" width={30} /> Rechercherun produit...
-        </button>
+        <div className="navbar">
+          <ul>
+            <li>
+              <Link className="link">NOS OFFRES</Link>
+            </li>
+            <li>
+              <Link className="link">MAQUILLAGE</Link>
+            </li>
+            <li>
+              <Link className="link">SOIN</Link>
+            </li>
+            <li>
+              <Link className="link">COLORATION</Link>
+            </li>
+            <li>
+              <Link className="link">CHEVEUX</Link>
+            </li>
+            <li>
+              <Link className="link">HOMME</Link>
+            </li>
+            <li>
+              <Link className="link">SERVICES EXCLUSIFS</Link>
+            </li>
+            <li>
+              <Link className="link">NOS ENGAGEMENTS</Link>
+            </li>
+          </ul>
+          <button type="button" className="overflow-hidden">
+            {" "}
+            <img src={search} alt="" width={30} />{" "}
+            <p>Rechercher un produit...</p>
+          </button>
+        </div>
       </nav>
     </div>
   );
