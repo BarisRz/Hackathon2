@@ -9,7 +9,6 @@ function Navbar() {
     <div className="header-wrapper">
       <div className="header">
         <p>Besoin d'aide ?</p>
-        {/* <img src={logo} alt="" className="logo" /> */}
         <ul className="user">
           <li>Inscription newsletter</li>
           <li>Mon Compte</li>
