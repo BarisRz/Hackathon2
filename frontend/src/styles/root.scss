@@ -1,3 +1,18 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@font-face {
+  font-family: "Campton-Bold";
+  src: url("../assets/fonts/Campton-BoldDEMO.otf") format("opentype");
+}
+
+@font-face {
+  font-family: "Campton-Light";
+  src: url("../assets/fonts/Campton-LightDEMO.otf") format("opentype");
+}
+
+:root {
+  --font-light: "Campton-Light";
+  --font-bold: "Campton-Bold";
+}
