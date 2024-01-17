@@ -3,20 +3,20 @@
   flex-direction: column;
   flex-wrap: wrap;
   margin: 0 auto;
-  width: 100vw;
-  min-height: 100vh;
+  width: 1240px;
+  height: calc(100vh - 56px - 90px);
   padding: 1rem;
 
   @media screen and (max-width: 720px) {
     padding: 0;
-    height: 100vh;
+    height: 100%;
   }
 
   .Container {
     display: flex;
     flex-direction: row;
-    max-height: 88dvh;
     width: 100%;
+    height: 100%;
     gap: 2rem;
 
     @media screen and (max-width: 980px) {
@@ -29,8 +29,7 @@
       flex-direction: row;
       flex-wrap: wrap;
       width: 100%;
-      height: 70dvh;
-      
+      height: 100%;
 
       overflow: hidden;
       border-radius: 1rem;
@@ -63,7 +62,6 @@
         }
 
         a {
-          
           text-decoration: none;
         }
         .leaflet-touch {
@@ -86,23 +84,20 @@
             margin: 0;
             align-items: center;
             justify-content: center;
-            
+
             border: none;
             border-radius: 0.4rem;
 
             span {
-              
               font-weight: 300;
               margin-top: -4px;
             }
 
             &:hover {
-              
               transform: scale(0.92);
             }
 
             &:active {
-              
               transform: scale(0.86);
             }
           }
@@ -111,7 +106,6 @@
     }
   }
 }
-
 
 .leaflet-div-icon {
   background: none !important;

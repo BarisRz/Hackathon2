@@ -3,19 +3,20 @@
   flex-direction: column;
   font-size: 0.8rem;
   .header {
+    background-image: url("../assets/Loreal.png");
+    background-repeat: no-repeat;
+    background-position: center;
     display: flex;
-    justify-content: space-around;
+    justify-content: space-between;
     align-items: center;
-    padding-left: 5rem;
+    padding-inline: 2rem;
     gap: 10rem;
-    p {
-      flex-grow: 5;
-    }
+    height: 5rem;
     .user {
       display: flex;
       gap: 30px;
       justify-self: right;
-      flex-grow: 2;
+
       img {
         margin-left: -1rem;
       }
@@ -30,34 +31,39 @@
     background-color: black;
     height: 3.5rem;
     align-items: center;
-    justify-content: space-around;
-
-    ul {
+    justify-content: center;
+    .navbar {
       display: flex;
-      justify-content: space-around;
-      gap: 2.5rem;
-      align-items: center;
-      color: white;
+      gap: 3rem;
+      width: 1200px;
+      justify-content: space-between;
 
-      li {
-        .link {
-          &:hover {
-            color: red;
+      ul {
+        width: 100%;
+        display: flex;
+        gap: 2.5rem;
+        align-items: center;
+        color: white;
+
+        li {
+          .link {
+            &:hover {
+              color: red;
+            }
           }
         }
       }
-    }
-    button {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 10px;
-      background-color: white;
-      height: 2.5rem;
-      width: 14rem;
-      border-radius: 20px;
-      padding: 0 1rem;
-      font-size: 0.8rem;
+      button {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+        background-color: white;
+        height: 2.5rem;
+        border-radius: 20px;
+        padding: 0 1rem;
+        font-size: 0.8rem;
+      }
     }
   }
 }
