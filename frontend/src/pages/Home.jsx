@@ -1,8 +1,57 @@
+/* eslint-disable jsx-a11y/click-events-have-key-events */
+/* eslint-disable jsx-a11y/no-static-element-interactions */
+/* eslint-disable jsx-a11y/anchor-is-valid */
+import { useState } from "react";
+import Popup from "reactjs-popup";
 import Product from "../components/Product";
+import "reactjs-popup/dist/index.css";
 import dataProduct from "../data/data.json";
 import "../styles/home.scss";
 
 function Home() {
+  const fragranceArray = [
+    "fragrance1.png",
+    "fragrance2.png",
+    "fragrance3.png",
+    "fragrance4.png",
+  ];
+  const haircareArray = [
+    "haircare1.png",
+    "haircare2.png",
+    "haircare3.png",
+    "hairecare4.png",
+  ];
+  const makeupArray = [
+    "makeup1.png",
+    "makeup2.png",
+    "makeup3.png",
+    "makeup4.png",
+  ];
+  const shampooArray = [
+    "shampoo1.png",
+    "shampoo2.png",
+    "shampoo3.png",
+    "shampoo4.png",
+  ];
+  const skincareArray = [
+    "skincare1.png",
+    "skincare2.png",
+    "skincare3.png",
+    "skincare4.png",
+  ];
+
+  function rand() {
+    return Math.floor(Math.random() * 4);
+  }
+
+  const [open, setOpen] = useState(false);
+  const closeModal = () => setOpen(false);
+  const [selectedProduct, setSelectedProduct] = useState({
+    productName: "",
+    brand: "",
+    productImgRand: "",
+  });
+  console.info(selectedProduct);
   return (
     <div className="max-w-[1200px] flex-col mx-auto">
       <div className="mt-4">
@@ -26,10 +75,54 @@ function Home() {
             <a href="#">Ombre à paupières</a>
           </div>
         </aside>
+        <div>
+          <Popup open={open} closeOnDocumentClick onClose={closeModal}>
+            <div className="modal">
+              <a className="close" onClick={closeModal}>
+                &times;
+              </a>
+              Vous avez selectionné ce produit:
+              <div>
+                <img src={selectedProduct.productImgRand} alt="productimg" />
+                {selectedProduct.productName} de la marque{" "}
+                {selectedProduct.brand}.{" "}
+              </div>
+              <div>
+                En cliquand ici vous pourrez trouver le magasin le plus proche
+                de chez vous et bénéficier des conseils de nos experts. Ainsi
+                que d'une remise sur ce produit complémentaire:
+              </div>
+            </div>
+          </Popup>
+        </div>
         <div className="flex-[3] flex flex-wrap">
-          {dataProduct.map((product) => (
-            <Product product={product} key={product.id} />
-          ))}
+          {dataProduct.map((product) => {
+            let productImgRand;
+            const randomPrice = Math.round(Math.random() * 20);
+            if (product.productCategory.includes("Fragrance")) {
+              productImgRand = fragranceArray[rand()];
+            } else if (product.productCategory.includes("Hair")) {
+              productImgRand = haircareArray[rand()];
+            } else if (product.productCategory.includes("Skin")) {
+              productImgRand = skincareArray[rand()];
+            } else if (product.productCategory.includes("Shampoo")) {
+              productImgRand = shampooArray[rand()];
+            } else if (product.productCategory.includes("Make")) {
+              productImgRand = makeupArray[rand()];
+            }
+
+            return (
+              <Product
+                product={product}
+                key={product.id}
+                productImgRand={productImgRand}
+                randomPrice={randomPrice}
+                setOpen={setOpen}
+                setSelectedProduct={setSelectedProduct}
+                selectedProduct={selectedProduct}
+              />
+            );
+          })}
         </div>
       </div>
     </div>
