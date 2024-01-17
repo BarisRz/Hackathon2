@@ -14,6 +14,7 @@ function App() {
     () => ({ position, setPosition }),
     [position, setPosition]
   );
+  const [magasin, setMagasin] = useState([]);
   const magasinValue = useMemo(
     () => ({ magasin, setMagasin }),
     [magasin, setMagasin]

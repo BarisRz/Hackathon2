@@ -1,5 +1,5 @@
 import { MapContainer, TileLayer } from "react-leaflet";
-// import BornesMarker from "../components/BornesMarker";
+import MagasinMarker from "../components/MagasinMarker";
 import LocationMarker from "../components/LocationMarker";
 import "../scss/Map.scss";
 
@@ -20,7 +20,7 @@ function Map() {
               url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
             />
             <LocationMarker />
-            {/* <BornesMarker /> */}
+            <MagasinMarker />
           </MapContainer>
         </div>
       </div>
