@@ -1,9 +1,10 @@
-import { Link } from "react-router-dom";
-import photo from "../assets/content/fragrance1.png";
-import { Rating } from "react-simple-star-rating";
 import { useState } from "react";
+import { Link } from "react-router-dom";
+import PropTypes from "prop-types";
+import { Rating } from "react-simple-star-rating";
+import photo from "../assets/content/fragrance1.png";
 
-function Product() {
+function Product({ product }) {
   const [rating, setRating] = useState(0);
 
   const handleRating = (rate) => {
@@ -15,9 +16,10 @@ function Product() {
       <div className="h-full w-full grid grid-rows-2">
         <img src={photo} alt="produit de beauté" className="mx-auto h-" />
         <div className="flex flex-col justify-end items-center">
-          <p className="font-black">Black Opium</p>
+          <p className="font-black">{product.productName}</p>
+          <p className="font-montserrat font-light">{product.brand}</p>
           <p className="font-montserrat font-light">
-            Parfum de l'abîme hurlant
+            {product.productCategory}
           </p>
 
           <Rating
@@ -46,5 +48,7 @@ function Product() {
     </div>
   );
 }
-
+Product.propTypes = {
+  product: PropTypes.func.isRequired,
+};
 export default Product;
