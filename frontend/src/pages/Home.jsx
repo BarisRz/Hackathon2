@@ -9,6 +9,25 @@ import dataProduct from "../data/data.json";
 import "../styles/home.scss";
 
 function Home() {
+  const [pageActuel, setPageActuel] = useState(0);
+  const [numberPage, setNumberPage] = useState(1);
+
+  const tailletableau = dataProduct.length;
+  const taillepage = 21;
+
+  function handlePageNext(slice) {
+    if (!(slice + taillepage > tailletableau)) {
+      setPageActuel(pageActuel + taillepage);
+      setNumberPage(numberPage + 1);
+    }
+  }
+
+  function handlePagePrevious(slice) {
+    if (!(slice - taillepage < 0)) {
+      setPageActuel(pageActuel - taillepage);
+      setNumberPage(numberPage - 1);
+    }
+  }
   const fragranceArray = [
     "fragrance1.png",
     "fragrance2.png",
@@ -51,7 +70,6 @@ function Home() {
     brand: "",
     productImgRand: "",
   });
-  console.info(selectedProduct);
   return (
     <div className="max-w-[1200px] flex-col mx-auto">
       <div className="mt-4">
@@ -65,14 +83,16 @@ function Home() {
         <aside className="flex-1 flex-col mt-11">
           <div className="font-bold">Nos produits</div>
           <div className="w-10/12 h-[1px] bg-gray-400 m-2" />
-          <div className="text-gray-400 text-sm">
-            <a href="#">Eyeliners et crayons</a>
-          </div>
-          <div className="text-gray-400 text-sm">
-            <a href="#">Sourcils</a>
-          </div>
-          <div className="text-gray-400 text-sm">
-            <a href="#">Ombre à paupières</a>
+          <div className="flex flex-col gap-3 pt-2">
+            <div className="text-gray-400 text-sm">
+              <a href="#">Eyeliners et crayons</a>
+            </div>
+            <div className="text-gray-400 text-sm">
+              <a href="#">Sourcils</a>
+            </div>
+            <div className="text-gray-400 text-sm">
+              <a href="#">Ombre à paupières</a>
+            </div>
           </div>
         </aside>
         <div>
@@ -96,33 +116,60 @@ function Home() {
           </Popup>
         </div>
         <div className="flex-[3] flex flex-wrap">
-          {dataProduct.map((product) => {
-            let productImgRand;
-            const randomPrice = Math.round(Math.random() * 20);
-            if (product.productCategory.includes("Fragrance")) {
-              productImgRand = fragranceArray[rand()];
-            } else if (product.productCategory.includes("Hair")) {
-              productImgRand = haircareArray[rand()];
-            } else if (product.productCategory.includes("Skin")) {
-              productImgRand = skincareArray[rand()];
-            } else if (product.productCategory.includes("Shampoo")) {
-              productImgRand = shampooArray[rand()];
-            } else if (product.productCategory.includes("Make")) {
-              productImgRand = makeupArray[rand()];
-            }
+          {dataProduct
+            .slice(pageActuel, pageActuel + taillepage)
+            .map((product) => {
+              let productImgRand;
+              const randomPrice = Math.round(Math.random() * 20);
+              if (product.productCategory.includes("Fragrance")) {
+                productImgRand = fragranceArray[rand()];
+              } else if (product.productCategory.includes("Hair")) {
+                productImgRand = haircareArray[rand()];
+              } else if (product.productCategory.includes("Skin")) {
+                productImgRand = skincareArray[rand()];
+              } else if (product.productCategory.includes("Shampoo")) {
+                productImgRand = shampooArray[rand()];
+              } else if (product.productCategory.includes("Make")) {
+                productImgRand = makeupArray[rand()];
+              }
 
-            return (
-              <Product
-                product={product}
-                key={product.id}
-                productImgRand={productImgRand}
-                randomPrice={randomPrice}
-                setOpen={setOpen}
-                setSelectedProduct={setSelectedProduct}
-                selectedProduct={selectedProduct}
-              />
-            );
-          })}
+              return (
+                <Product
+                  product={product}
+                  key={product.id}
+                  productImgRand={productImgRand}
+                  randomPrice={randomPrice}
+                  setOpen={setOpen}
+                  setSelectedProduct={setSelectedProduct}
+                  selectedProduct={selectedProduct}
+                />
+              );
+            })}{" "}
+          <div className="mx-auto w-full flex justify-center my-8">
+            <button
+              type="button"
+              onClick={() => {
+                handlePagePrevious(pageActuel);
+              }}
+              disabled={pageActuel - taillepage < 0}
+              className="mx-2 py-1 w-32 bg-black transition text-white hover:bg-[#e32847] disabled:bg-gray-200 disabled:text-white"
+            >
+              Précédent
+            </button>
+            <p className="mx-4 bg-gray-300 w-8 h-8 rounded-full flex justify-center items-center">
+              {numberPage}
+            </p>
+            <button
+              type="button"
+              onClick={() => {
+                handlePageNext(pageActuel);
+              }}
+              disabled={pageActuel + taillepage >= tailletableau}
+              className="mx-2 py-1 w-32 bg-black transition text-white hover:bg-[#e32847] disabled:bg-gray-200 disabled:text-white"
+            >
+              Suivant
+            </button>
+          </div>
         </div>
       </div>
     </div>
