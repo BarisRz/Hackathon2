@@ -8,6 +8,7 @@ import "reactjs-popup/dist/index.css";
 import { v4 as uuidv4 } from "uuid";
 import { Link } from "react-router-dom";
 import data from "../data/data.json";
+import "../styles/magasin.scss";
 
 function Magasin() {
   const [open, setOpen] = useState(false);
@@ -66,74 +67,82 @@ function Magasin() {
     productImgRand = makeupArray[1];
   }
   return (
-    <div>
-      Vous avez sélectionné ce magasin. Merci de remplir ce formulaire afin que
-      nos équipes puissent préparer vos produits. Profitez d'une remise de 50%
-      sur un produit complémentaire:
-      <div>
-        <img src={productImgRand} alt="imgproductOffer" />
-        <p>{productOffer.productName}</p>
-        <p>{productOffer.brand}</p>
-      </div>
-      <form className="formContainer" onSubmit={popupOpener}>
-        <div className="input">
-          <label htmlFor="Name">Nom</label>
-          <input
-            value=""
-            type="text"
-            name="Name"
-            id="Name"
-            placeholder="Dupond"
-          />
+    <div className="magasin-wrapper">
+      <p>
+        Vous avez sélectionné ce magasin. Merci de remplir ce formulaire afin
+        que nos équipes puissent préparer vos produits. <br />
+        <span>Profitez d'une remise de 50% sur un produit complémentaire:</span>
+      </p>
+      <div className="prod-container">
+        <div className="comp-product">
+          <img src={productImgRand} alt="imgproductOffer" />
+          <p>{productOffer.productName}</p>
+          <p>{productOffer.brand}</p>
         </div>
+        <div className="line"></div>
+        <form className="formContainer" onSubmit={popupOpener}>
+          <div className="input">
+            <label htmlFor="Name">Nom</label>
+            <input
+              value=""
+              type="text"
+              name="Name"
+              id="Name"
+              placeholder="Dupond"
+            />
+          </div>
 
-        <div className="input">
-          <label htmlFor="firstName">Prénom</label>
-          <input
-            value=""
-            type="text"
-            name="firstName"
-            id="firstName"
-            placeholder="Jean"
-          />
-        </div>
-        <div className="input">
-          <label htmlFor="mail">Adresse mail</label>
-          <input
-            value=""
-            type="mail"
-            name="mail"
-            id="mail"
-            placeholder="jeandupont@jean.fr"
-          />
-        </div>
-        <div className="input">
-          <label htmlFor="tel">Numéro de téléphone</label>
-          <input
-            value=""
-            type="text"
-            name="tel"
-            id="tel"
-            placeholder="+33 6 70 32 54 98"
-          />
-        </div>
-        <div className="buttonSubmit">
-          <button type="submit" className="w-48 h-16 bg-black text-white ">
-            Envoyer
-          </button>
-          <Popup open={open} closeOnDocumentClick onClose={closeModal}>
-            <div className="modal">
-              <a className="close" onClick={closeModal}>
-                &times;
-              </a>
-              Merci d'avoir réservé nos produits. Un mail de confirmation vous à
-              été envoyé. Voici votre numéro de réservation{" "}
-              {uuidv4().slice(0, 8)}
-            </div>
-            <Link to="/">Retour aux offres</Link>
-          </Popup>
-        </div>
-      </form>
+          <div className="input">
+            <label htmlFor="firstName">Prénom</label>
+            <input
+              value=""
+              type="text"
+              name="firstName"
+              id="firstName"
+              placeholder="Jean"
+            />
+          </div>
+          <div className="input">
+            <label htmlFor="mail">Adresse mail</label>
+            <input
+              value=""
+              type="mail"
+              name="mail"
+              id="mail"
+              placeholder="jeandupont@jean.fr"
+            />
+          </div>
+          <div className="input">
+            <label htmlFor="tel">Numéro de téléphone</label>
+            <input
+              value=""
+              type="text"
+              name="tel"
+              id="tel"
+              placeholder="+33 6 70 32 54 98"
+            />
+          </div>
+        </form>
+      </div>
+      <div className="buttonSubmit">
+        <button
+          type="submit"
+          className="w-48 h-16 bg-black text-white "
+          onClick={popupOpener}
+        >
+          Envoyer
+        </button>
+        <Popup open={open} closeOnDocumentClick onClose={closeModal}>
+          <div className="modal">
+            <a className="close" onClick={closeModal}>
+              &times;
+            </a>
+            Merci d'avoir réservé nos produits. Un mail de confirmation vous à
+            été envoyé. Voici votre numéro de réservation {uuidv4().slice(0, 8)}
+          </div>
+          <Link to="/">Retour aux offres</Link>
+        </Popup>
+      </div>
     </div>
   );
 }
