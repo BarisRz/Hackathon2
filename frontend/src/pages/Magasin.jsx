@@ -125,7 +125,11 @@ function Magasin() {
         </form>
       </div>
       <div className="buttonSubmit">
-        <button type="submit" className="w-48 h-16 bg-black text-white ">
+        <button
+          type="submit"
+          className="w-48 h-16 bg-black text-white "
+          onClick={popupOpener}
+        >
           Envoyer
         </button>
         <Popup open={open} closeOnDocumentClick onClose={closeModal}>
