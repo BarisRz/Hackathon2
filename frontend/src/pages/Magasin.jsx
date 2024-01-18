@@ -1,3 +1,5 @@
+/* eslint-disable react/self-closing-comp */
+/* eslint-disable import/no-unresolved */
 /* eslint-disable prefer-destructuring */
 /* eslint-disable jsx-a11y/anchor-is-valid */
 /* eslint-disable jsx-a11y/no-static-element-interactions */
@@ -8,6 +10,8 @@ import "reactjs-popup/dist/index.css";
 import { v4 as uuidv4 } from "uuid";
 import { Link } from "react-router-dom";
 import data from "../data/data.json";
+import "../scss/Magasin.scss";
+import QRcode from "../../public/QRcode.png";
 import "../styles/magasin.scss";
 
 function Magasin() {
@@ -122,29 +126,36 @@ function Magasin() {
               placeholder="+33 6 70 32 54 98"
             />
           </div>
-        </form>
-      </div>
-      <div className="buttonSubmit">
-        <button
-          type="submit"
-          className="w-48 h-16 bg-black text-white "
-          onClick={popupOpener}
-        >
-          Envoyer
-        </button>
-        <Popup open={open} closeOnDocumentClick onClose={closeModal}>
-          <div className="modal">
-            <a className="close" onClick={closeModal}>
-              &times;
-            </a>
-            Merci d'avoir réservé nos produits. Un mail de confirmation vous à
-            été envoyé. Voici votre numéro de réservation {uuidv4().slice(0, 8)}
+          <div className="buttonSubmit">
+            <button type="submit" className="w-48 h-16 bg-black text-white ">
+              Envoyer
+            </button>
+            <Popup
+              open={open}
+              closeOnDocumentClick
+              onClose={closeModal}
+              className="popupMap"
+            >
+              <div className="modal">
+                <a className="close" onClick={closeModal}>
+                  &times;
+                </a>
+
+                <img src={QRcode} alt="qucode" className="QRcode" />
+                <p className="Text">
+                  Merci d'avoir réservé nos produits. Un mail de confirmation
+                  vous à été envoyé. Voici votre numéro de réservation{" "}
+                  {uuidv4().slice(0, 8)}
+                </p>
+              </div>
+              <Link to="/" className="buttonBack">
+                Retour aux offres
+              </Link>
+            </Popup>
           </div>
-          <Link to="/">Retour aux offres</Link>
-        </Popup>
+        </form>
       </div>
     </div>
   );
 }
-
 export default Magasin;
