@@ -1,7 +1,7 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable react/prop-types */
 /* eslint-disable object-shorthand */
-import { useState } from "react";
+import { useState, useMemo } from "react";
 import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
 
@@ -14,6 +14,9 @@ function Product({
   setOpen,
   setSelectedProduct,
 }) {
+  const keepValue = useMemo(() => {
+    product = product;
+  }, [product, productImgRand, randomPrice]);
   const [rating, setRating] = useState(0);
 
   const handleRating = (rate) => {

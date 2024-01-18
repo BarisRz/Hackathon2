@@ -1,33 +1,14 @@
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 /* eslint-disable jsx-a11y/anchor-is-valid */
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Popup from "reactjs-popup";
 import Product from "../components/Product";
 import "reactjs-popup/dist/index.css";
-import dataProduct from "../data/data.json";
+import firstDataProduct from "../data/data.json";
 import "../styles/home.scss";
 
 function Home() {
-  const [pageActuel, setPageActuel] = useState(0);
-  const [numberPage, setNumberPage] = useState(1);
-
-  const tailletableau = dataProduct.length;
-  const taillepage = 21;
-
-  function handlePageNext(slice) {
-    if (!(slice + taillepage > tailletableau)) {
-      setPageActuel(pageActuel + taillepage);
-      setNumberPage(numberPage + 1);
-    }
-  }
-
-  function handlePagePrevious(slice) {
-    if (!(slice - taillepage < 0)) {
-      setPageActuel(pageActuel - taillepage);
-      setNumberPage(numberPage - 1);
-    }
-  }
   const fragranceArray = [
     "fragrance1.png",
     "fragrance2.png",
@@ -59,6 +40,25 @@ function Home() {
     "skincare4.png",
   ];
 
+  const [pageActuel, setPageActuel] = useState(0);
+  const [numberPage, setNumberPage] = useState(1);
+
+  const taillepage = 21;
+
+  function handlePageNext(slice) {
+    if (!(slice + taillepage > tailletableau)) {
+      setPageActuel(pageActuel + taillepage);
+      setNumberPage(numberPage + 1);
+    }
+  }
+
+  function handlePagePrevious(slice) {
+    if (!(slice - taillepage < 0)) {
+      setPageActuel(pageActuel - taillepage);
+      setNumberPage(numberPage - 1);
+    }
+  }
+
   function rand() {
     return Math.floor(Math.random() * 4);
   }
@@ -70,6 +70,29 @@ function Home() {
     brand: "",
     productImgRand: "",
   });
+  const [dataProduct, setDataProduct] = useState(firstDataProduct);
+
+  useEffect(() => {
+    const updatedDataProduct = firstDataProduct.map((product) => {
+      let productImgRand;
+      if (product.productCategory.includes("Fragrance")) {
+        productImgRand = fragranceArray[rand()];
+      } else if (product.productCategory.includes("Hair")) {
+        productImgRand = haircareArray[rand()];
+      } else if (product.productCategory.includes("Skin")) {
+        productImgRand = skincareArray[rand()];
+      } else if (product.productCategory.includes("Shampoo")) {
+        productImgRand = shampooArray[rand()];
+      } else if (product.productCategory.includes("Make")) {
+        productImgRand = makeupArray[rand()];
+      }
+      return { ...product, productImg: productImgRand };
+    });
+
+    setDataProduct(updatedDataProduct);
+  }, []);
+
+  const tailletableau = dataProduct.length;
   return (
     <div className="max-w-[1200px] flex-col mx-auto">
       <div className="mt-4">
@@ -119,26 +142,12 @@ function Home() {
           {dataProduct
             .slice(pageActuel, pageActuel + taillepage)
             .map((product) => {
-              let productImgRand;
-              const randomPrice = Math.round(Math.random() * 20);
-              if (product.productCategory.includes("Fragrance")) {
-                productImgRand = fragranceArray[rand()];
-              } else if (product.productCategory.includes("Hair")) {
-                productImgRand = haircareArray[rand()];
-              } else if (product.productCategory.includes("Skin")) {
-                productImgRand = skincareArray[rand()];
-              } else if (product.productCategory.includes("Shampoo")) {
-                productImgRand = shampooArray[rand()];
-              } else if (product.productCategory.includes("Make")) {
-                productImgRand = makeupArray[rand()];
-              }
-
               return (
                 <Product
                   product={product}
                   key={product.id}
-                  productImgRand={productImgRand}
-                  randomPrice={randomPrice}
+                  productImgRand={product.productImg}
+                  randomPrice={0}
                   setOpen={setOpen}
                   setSelectedProduct={setSelectedProduct}
                   selectedProduct={selectedProduct}
