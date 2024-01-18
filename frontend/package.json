@@ -17,7 +17,8 @@
     "reactjs-popup": "^2.0.6",
     "sass": "^1.69.7",
     "supercluster": "^8.0.1",
-    "use-supercluster": "^1.1.0"
+    "use-supercluster": "^1.1.0",
+    "uuid": "^9.0.1"
   },
   "devDependencies": {
     "@vitejs/plugin-react": "^4.0.3",
