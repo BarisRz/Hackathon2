@@ -12,7 +12,7 @@ function Navbar() {
         <ul className="user">
           <li>Inscription newsletter</li>
           <li>Mon Compte</li>
-          <li>Mon Panier (0)</li>
+          <li>Mon Panier (3)</li>
           <img src={cart} alt="" width={20} />
         </ul>
       </div>

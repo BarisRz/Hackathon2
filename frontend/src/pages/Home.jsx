@@ -9,14 +9,15 @@ import "reactjs-popup/dist/index.css";
 import firstDataProduct from "../data/data.json";
 import ProductContext from "../Context/ProductContext";
 import "../styles/home.scss";
+import Remise from "../assets/Remise.png";
 
 function Home() {
-  const { selectedProduct } = useContext(ProductContext);
+  const { selectedProduct, setSelectedProduct } = useContext(ProductContext);
   const [pageActuel, setPageActuel] = useState(0);
   const [numberPage, setNumberPage] = useState(1);
   const [dataProduct, setDataProduct] = useState(firstDataProduct);
   const tailletableau = dataProduct.length;
-  const taillepage = 21;
+  const taillepage = 3;
 
   function handlePageNext(slice) {
     if (!(slice + taillepage > tailletableau)) {
@@ -73,7 +74,7 @@ function Home() {
   }
   const [open, setOpen] = useState(false);
   const closeModal = () => setOpen(false);
-  let randomProduct = firstDataProduct[randItem()];
+  const randomProduct = firstDataProduct[randItem()];
 
   useEffect(() => {
     const updatedDataProduct = firstDataProduct.map((product) => {
@@ -101,6 +102,13 @@ function Home() {
     setDataProduct(updatedDataProduct);
   }, []);
 
+  const popupOpener = () => {
+    setOpen((o) => !o);
+    setSelectedProduct(info);
+  };
+  const recupData = () => {
+    setSelectedProduct(info);
+  };
   return (
     <div className="max-w-[1200px] flex-col mx-auto">
       <div className="mt-4">
@@ -126,37 +134,26 @@ function Home() {
             </div>
           </div>
         </aside>
+
         <div>
           <Popup open={open} closeOnDocumentClick onClose={closeModal}>
-            {/* <a className="close" onClick={closeModal}>
-                  &times;
-                </a> */}
-            <div className="flex-1 flex items-center justify-center">
-              <img
-                src={selectedProduct.productImgRand}
-                alt="productimg"
-                className="w-6/12"
-              />
-              {/* {selectedProduct.productName} de la marque{" "}
-                {selectedProduct.brand}.{" "} */}
+            <div className="flex-1 flex items-center justify-center ">
+              <img src={Remise} alt="productimg" className="w-6/12" />
             </div>
-            <div className="flex-1 flex justify-center px-10 flex-col">
-              <p className="font-bold text-3xl">
-                {selectedProduct.productName}
-              </p>
-              <p className="text-xs text-gray-500 pt-2">
-                {selectedProduct.productName}
-              </p>
-              <p className="text-base font-bold text-gray-500 pt-2">
-                {selectedProduct.price}€
+            <div className="flex-1 flex justify-center px-10 flex-col ">
+              <p className=" text-gray-700 pt-2 text-center mb-2 text-lg">
+                Bravo!
               </p>
               <p className="text-sm text-gray-700 pt-2">
-                Ne manquez pas cette opportunité unique ! Cliquez sur le bouton
-                ci-dessous pour trouver le magasin le plus proche de chez vous.
-                Nos experts sont prêts à vous fournir des conseils personnalisés
-                et vous bénéficierez d'une remise spéciale sur ce produit
-                complémentaire. Agissez maintenant et découvrez ce que nous
-                avons à offrir !
+                Votre Achat vous donne le droit à une remise sur une sélection
+                d'article.
+                <p>
+                  Cliquez sur le bouton ci-dessous pour trouver le magasin le
+                  plus proche de chez vous. Nos experts sont prêts à vous
+                  fournir des conseils personnalisés et vous bénéficierez d'une
+                  remise spéciale sur ce produit complémentaire. Agissez
+                  maintenant et découvrez ce que nous avons à offrir !
+                </p>
               </p>
               <div className="flex items-center pt-8 flex-col">
                 <Link
@@ -165,19 +162,12 @@ function Home() {
                 >
                   Trouver en magasin
                 </Link>
-                {/* <p className="w-10/12 py-2 text-xs">
-                  Nous avons sélectionné ces produits spécialement pour vous, en
-                  tenant compte de vos préférences et de vos besoins. Nous
-                  pensons qu'ils pourraient être parfaits pour vous. Jetez un
-                  œil et découvrez ce que nous avons à offrir !
-                </p>
-                <ul className="p-4 transition w-full font-bold text-center flex flex-col gap-2 text-white">
-                  <li className="font-black bg-black">
-                    {randomProduct.productName}
-                  </li>
-                  <li className="bg-black"> {randomProduct.brand}</li>
-                  <li className="bg-black"> {randomProduct.productCategory}</li>
-                </ul> */}
+                <button
+                  type="button"
+                  className="bg-black text-white mt-2 p-4 hover:bg-[#e32847] text-center transition w-11/12 font-bold"
+                >
+                  Livraison
+                </button>
               </div>
             </div>
           </Popup>
@@ -193,30 +183,22 @@ function Home() {
                   setOpen={setOpen}
                 />
               );
-            })}{" "}
-          <div className="mx-auto w-full flex justify-center my-8">
+            })}
+          <div className="buttonContainer">
+            <Link
+              to="/Map"
+              className="bg-black text-white mt-2 p-4 hover:bg-[#e32847] text-center transition  font-bold"
+              onClick={recupData}
+            >
+              Retrait en magasin
+            </Link>
+
             <button
               type="button"
-              onClick={() => {
-                handlePagePrevious(pageActuel);
-              }}
-              disabled={pageActuel - taillepage < 0}
-              className="mx-2 py-1 w-32 bg-black transition text-white hover:bg-[#e32847] disabled:bg-gray-200 disabled:text-white"
+              className="bg-black text-white mt-2 p-4 hover:bg-[#e32847] text-center transition  font-bold"
+              onClick={popupOpener}
             >
-              Précédent
-            </button>
-            <p className="mx-4 bg-gray-300 w-8 h-8 rounded-full flex justify-center items-center">
-              {numberPage}
-            </p>
-            <button
-              type="button"
-              onClick={() => {
-                handlePageNext(pageActuel);
-              }}
-              disabled={pageActuel + taillepage >= tailletableau}
-              className="mx-2 py-1 w-32 bg-black transition text-white hover:bg-[#e32847] disabled:bg-gray-200 disabled:text-white"
-            >
-              Suivant
+              Livraison à domicile
             </button>
           </div>
         </div>

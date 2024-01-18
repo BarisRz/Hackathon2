@@ -15,20 +15,6 @@ function Product({ product, productImgRand, randomPrice, setOpen }) {
   const handleRating = (rate) => {
     setRating(rate);
   };
-  const info = {
-    productName: product.productName,
-    brand: product.brand,
-    productImgRand: product.productImg,
-    price: (product.price + 0.9).toFixed(2),
-  };
-
-  const popupOpener = () => {
-    setOpen((o) => !o);
-    setSelectedProduct(info);
-  };
-  const recupData = () => {
-    setSelectedProduct(info);
-  };
 
   return (
     <div className="w-1/3 h-[500px] p-2 font-montserrat">
@@ -61,22 +47,6 @@ function Product({ product, productImgRand, randomPrice, setOpen }) {
             emptyColor="#333232"
           />
           <p className="font-extrabold">{(product.price + 0.9).toFixed(2)} €</p>
-
-          <Link
-            to="/Map"
-            className="bg-black text-white mt-2 p-4 hover:bg-[#e32847] text-center transition w-11/12 font-bold"
-            onClick={recupData}
-          >
-            Trouver en magasin
-          </Link>
-
-          <button
-            type="button"
-            className="bg-black text-white mt-2 p-4 hover:bg-[#e32847] text-center transition w-11/12 font-bold"
-            onClick={popupOpener}
-          >
-            Acheter
-          </button>
         </div>
       </div>
     </div>
