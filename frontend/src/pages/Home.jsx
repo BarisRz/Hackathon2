@@ -74,7 +74,7 @@ function Home() {
   useEffect(() => {
     const updatedDataProduct = firstDataProduct.map((product) => {
       let productImgRand;
-      let randomPrice = randPrice();
+      const randomPrice = randPrice();
       if (product.productCategory.includes("Fragrance")) {
         productImgRand = fragranceArray[rand()];
       } else if (product.productCategory.includes("Hair")) {
@@ -147,11 +147,7 @@ function Home() {
             .slice(pageActuel, pageActuel + taillepage)
             .map((product) => {
               return (
-                <Product
-                  product={product}
-                  key={product.id}
-                  setOpen={setOpen}
-                />
+                <Product product={product} key={product.id} setOpen={setOpen} />
               );
             })}{" "}
           <div className="mx-auto w-full flex justify-center my-8">
