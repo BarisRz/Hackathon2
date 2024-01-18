@@ -1,10 +1,14 @@
 import { MapContainer, TileLayer } from "react-leaflet";
+import { useContext } from "react";
 import MagasinMarker from "../components/MagasinMarker";
 import LocationMarker from "../components/LocationMarker";
+import ProductContext from "../Context/ProductContext";
 import "../scss/Map.scss";
 
 function Map() {
   window.scrollTo(0, 0);
+  const { selectedProduct } = useContext(ProductContext);
+  console.info(selectedProduct);
   return (
     <div className="allMap">
       <div className="Container">

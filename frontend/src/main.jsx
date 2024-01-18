@@ -7,6 +7,7 @@ import App from "./pages/App";
 import Home from "./pages/Home";
 import Map from "./pages/Map";
 import AddMagasin from "./pages/AddMagasin";
+import Magasin from "./pages/Magasin";
 
 const router = createBrowserRouter([
   {
@@ -24,6 +25,10 @@ const router = createBrowserRouter([
       {
         path: "/AddMagasin",
         element: <AddMagasin />,
+      },
+      {
+        path: "/Magasin",
+        element: <Magasin />,
       },
     ],
   },

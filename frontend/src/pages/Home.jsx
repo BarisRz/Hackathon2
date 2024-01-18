@@ -1,14 +1,35 @@
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 /* eslint-disable jsx-a11y/anchor-is-valid */
-import { useState, useEffect } from "react";
+import { useState, useContext, useEffect } from "react";
 import Popup from "reactjs-popup";
 import Product from "../components/Product";
 import "reactjs-popup/dist/index.css";
 import firstDataProduct from "../data/data.json";
+import ProductContext from "../Context/ProductContext";
 import "../styles/home.scss";
 
 function Home() {
+  const { selectedProduct } = useContext(ProductContext);
+  const [pageActuel, setPageActuel] = useState(0);
+  const [numberPage, setNumberPage] = useState(1);
+  const [dataProduct, setDataProduct] = useState(firstDataProduct);
+  const tailletableau = dataProduct.length;
+  const taillepage = 21;
+
+  function handlePageNext(slice) {
+    if (!(slice + taillepage > tailletableau)) {
+      setPageActuel(pageActuel + taillepage);
+      setNumberPage(numberPage + 1);
+    }
+  }
+
+  function handlePagePrevious(slice) {
+    if (!(slice - taillepage < 0)) {
+      setPageActuel(pageActuel - taillepage);
+      setNumberPage(numberPage - 1);
+    }
+  }
   const fragranceArray = [
     "fragrance1.png",
     "fragrance2.png",
@@ -40,25 +61,6 @@ function Home() {
     "skincare4.png",
   ];
 
-  const [pageActuel, setPageActuel] = useState(0);
-  const [numberPage, setNumberPage] = useState(1);
-
-  const taillepage = 21;
-
-  function handlePageNext(slice) {
-    if (!(slice + taillepage > tailletableau)) {
-      setPageActuel(pageActuel + taillepage);
-      setNumberPage(numberPage + 1);
-    }
-  }
-
-  function handlePagePrevious(slice) {
-    if (!(slice - taillepage < 0)) {
-      setPageActuel(pageActuel - taillepage);
-      setNumberPage(numberPage - 1);
-    }
-  }
-
   function rand() {
     return Math.floor(Math.random() * 4);
   }
@@ -70,18 +72,12 @@ function Home() {
   }
   const [open, setOpen] = useState(false);
   const closeModal = () => setOpen(false);
-  const [selectedProduct, setSelectedProduct] = useState({
-    productName: "",
-    brand: "",
-    productImgRand: "",
-  });
-  const [dataProduct, setDataProduct] = useState(firstDataProduct);
   let randomProduct = firstDataProduct[randItem()];
 
   useEffect(() => {
     const updatedDataProduct = firstDataProduct.map((product) => {
       let productImgRand;
-      let randomPrice = randPrice();
+      const randomPrice = randPrice();
       if (product.productCategory.includes("Fragrance")) {
         productImgRand = fragranceArray[rand()];
       } else if (product.productCategory.includes("Hair")) {
@@ -104,7 +100,6 @@ function Home() {
     setDataProduct(updatedDataProduct);
   }, []);
 
-  const tailletableau = dataProduct.length;
   return (
     <div className="max-w-[1200px] flex-col mx-auto">
       <div className="mt-4">
@@ -161,13 +156,7 @@ function Home() {
             .slice(pageActuel, pageActuel + taillepage)
             .map((product) => {
               return (
-                <Product
-                  product={product}
-                  key={product.id}
-                  setOpen={setOpen}
-                  setSelectedProduct={setSelectedProduct}
-                  selectedProduct={selectedProduct}
-                />
+                <Product product={product} key={product.id} setOpen={setOpen} />
               );
             })}{" "}
           <div className="mx-auto w-full flex justify-center my-8">
