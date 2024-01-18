@@ -62,6 +62,9 @@ function Home() {
   function rand() {
     return Math.floor(Math.random() * 4);
   }
+  function randPrice() {
+    return Math.floor(Math.random() * 20);
+  }
 
   const [open, setOpen] = useState(false);
   const closeModal = () => setOpen(false);
@@ -75,6 +78,7 @@ function Home() {
   useEffect(() => {
     const updatedDataProduct = firstDataProduct.map((product) => {
       let productImgRand;
+      let randomPrice = randPrice();
       if (product.productCategory.includes("Fragrance")) {
         productImgRand = fragranceArray[rand()];
       } else if (product.productCategory.includes("Hair")) {
@@ -86,7 +90,12 @@ function Home() {
       } else if (product.productCategory.includes("Make")) {
         productImgRand = makeupArray[rand()];
       }
-      return { ...product, productImg: productImgRand };
+      return {
+        ...product,
+        productImg: productImgRand,
+        price: randomPrice,
+        star: Math.max(3, Math.floor(Math.random() * 6)),
+      };
     });
 
     setDataProduct(updatedDataProduct);
@@ -146,8 +155,6 @@ function Home() {
                 <Product
                   product={product}
                   key={product.id}
-                  productImgRand={product.productImg}
-                  randomPrice={0}
                   setOpen={setOpen}
                   setSelectedProduct={setSelectedProduct}
                   selectedProduct={selectedProduct}

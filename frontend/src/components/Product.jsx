@@ -7,16 +7,7 @@ import PropTypes from "prop-types";
 
 import { Rating } from "react-simple-star-rating";
 
-function Product({
-  product,
-  productImgRand,
-  randomPrice,
-  setOpen,
-  setSelectedProduct,
-}) {
-  const keepValue = useMemo(() => {
-    product = product;
-  }, [product, productImgRand, randomPrice]);
+function Product({ product, randomPrice, setOpen, setSelectedProduct }) {
   const [rating, setRating] = useState(0);
 
   const handleRating = (rate) => {
@@ -25,7 +16,7 @@ function Product({
   const info = {
     productName: product.productName,
     brand: product.brand,
-    productImgRand: productImgRand,
+    productImgRand: product.productImg,
   };
 
   const popupOpener = () => {
@@ -37,7 +28,7 @@ function Product({
     <div className="w-1/3 h-[500px] p-2 font-montserrat">
       <div className="h-full w-full grid grid-rows-2">
         <img
-          src={productImgRand}
+          src={product.productImg}
           alt="produit de beauté"
           className="mx-auto h-[200px]"
         />
@@ -52,7 +43,7 @@ function Product({
             onClick={handleRating}
             className="rating scale-50"
             SVGclassName="inline-block"
-            initialValue={3}
+            initialValue={product.star}
             transition
             fillColorArray={[
               "#e22746",
@@ -63,7 +54,7 @@ function Product({
             ]}
             emptyColor="#333232"
           />
-          <p className="font-extrabold">{(randomPrice + 0.9).toFixed(2)} €</p>
+          <p className="font-extrabold">{(product.price + 0.9).toFixed(2)} €</p>
           <Link
             to="/Map"
             className="bg-black text-white mt-2 p-4 hover:bg-[#e32847] text-center transition w-11/12 font-bold"
