@@ -1,11 +1,13 @@
+/* eslint-disable prefer-destructuring */
 /* eslint-disable jsx-a11y/anchor-is-valid */
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import Popup from "reactjs-popup";
 import "reactjs-popup/dist/index.css";
-import data from "../data/data.json";
 import { v4 as uuidv4 } from "uuid";
+import { Link } from "react-router-dom";
+import data from "../data/data.json";
 
 function Magasin() {
   const [open, setOpen] = useState(false);
@@ -16,7 +18,8 @@ function Magasin() {
     setOpen((o) => !o);
   };
   const random = Math.round(Math.random() * data.length);
-  const productOffer = data[random];
+  const product = useMemo(() => random, []);
+  const productOffer = data[product];
 
   const fragranceArray = [
     "fragrance1.png",
@@ -49,21 +52,18 @@ function Magasin() {
     "skincare4.png",
   ];
 
-  function rand() {
-    return Math.floor(Math.random() * 4);
-  }
   let productImgRand;
 
   if (productOffer.productCategory.includes("Fragrance")) {
-    productImgRand = fragranceArray[rand()];
+    productImgRand = fragranceArray[1];
   } else if (productOffer.productCategory.includes("Hair")) {
-    productImgRand = haircareArray[rand()];
+    productImgRand = haircareArray[1];
   } else if (productOffer.productCategory.includes("Skin")) {
-    productImgRand = skincareArray[rand()];
+    productImgRand = skincareArray[1];
   } else if (productOffer.productCategory.includes("Shampoo")) {
-    productImgRand = shampooArray[rand()];
+    productImgRand = shampooArray[1];
   } else if (productOffer.productCategory.includes("Make")) {
-    productImgRand = makeupArray[rand()];
+    productImgRand = makeupArray[1];
   }
   return (
     <div>
@@ -119,7 +119,7 @@ function Magasin() {
         </div>
         <div className="buttonSubmit">
           <button type="submit" className="w-48 h-16 bg-black text-white ">
-            Recherche
+            Envoyer
           </button>
           <Popup open={open} closeOnDocumentClick onClose={closeModal}>
             <div className="modal">
@@ -130,6 +130,7 @@ function Magasin() {
               été envoyé. Voici votre numéro de réservation{" "}
               {uuidv4().slice(0, 8)}
             </div>
+            <Link to="/">Retour aux offres</Link>
           </Popup>
         </div>
       </form>
