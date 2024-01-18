@@ -1,5 +1,13 @@
 .popup-content {
-  width: 1100px;
-  height: 700px;
+  width: 950px;
+  height: 450px;
   display: flex;
+}
+.buttonContainer{
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  margin-top: 3rem;
+  gap:4rem;
+
 }
