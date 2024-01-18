@@ -10,7 +10,6 @@ import "reactjs-popup/dist/index.css";
 import { v4 as uuidv4 } from "uuid";
 import { Link } from "react-router-dom";
 import data from "../data/data.json";
-import "../scss/Magasin.scss";
 import QRcode from "../../public/QRcode.png";
 import "../styles/magasin.scss";
 
