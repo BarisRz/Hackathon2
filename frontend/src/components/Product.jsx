@@ -9,6 +9,7 @@ import ProductContext from "../Context/ProductContext";
 
 function Product({ product, productImgRand, randomPrice, setOpen }) {
   const { setSelectedProduct } = useContext(ProductContext);
+
   const [rating, setRating] = useState(0);
 
   const handleRating = (rate) => {

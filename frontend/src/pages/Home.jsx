@@ -1,11 +1,11 @@
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 /* eslint-disable jsx-a11y/anchor-is-valid */
-import { useState, useContext } from "react";
+import { useState, useContext, useEffect } from "react";
 import Popup from "reactjs-popup";
 import Product from "../components/Product";
 import "reactjs-popup/dist/index.css";
-import dataProduct from "../data/data.json";
+import firstDataProduct from "../data/data.json";
 import ProductContext from "../Context/ProductContext";
 import "../styles/home.scss";
 
@@ -13,7 +13,7 @@ function Home() {
   const { selectedProduct } = useContext(ProductContext);
   const [pageActuel, setPageActuel] = useState(0);
   const [numberPage, setNumberPage] = useState(1);
-
+  const [dataProduct, setDataProduct] = useState(firstDataProduct);
   const tailletableau = dataProduct.length;
   const taillepage = 21;
 
@@ -68,6 +68,26 @@ function Home() {
   const [open, setOpen] = useState(false);
   const closeModal = () => setOpen(false);
 
+  useEffect(() => {
+    const updatedDataProduct = firstDataProduct.map((product) => {
+      let productImgRand;
+      if (product.productCategory.includes("Fragrance")) {
+        productImgRand = fragranceArray[rand()];
+      } else if (product.productCategory.includes("Hair")) {
+        productImgRand = haircareArray[rand()];
+      } else if (product.productCategory.includes("Skin")) {
+        productImgRand = skincareArray[rand()];
+      } else if (product.productCategory.includes("Shampoo")) {
+        productImgRand = shampooArray[rand()];
+      } else if (product.productCategory.includes("Make")) {
+        productImgRand = makeupArray[rand()];
+      }
+      return { ...product, productImg: productImgRand };
+    });
+
+    setDataProduct(updatedDataProduct);
+  }, []);
+
   return (
     <div className="max-w-[1200px] flex-col mx-auto">
       <div className="mt-4">
@@ -117,26 +137,12 @@ function Home() {
           {dataProduct
             .slice(pageActuel, pageActuel + taillepage)
             .map((product) => {
-              let productImgRand;
-              const randomPrice = Math.round(Math.random() * 20);
-              if (product.productCategory.includes("Fragrance")) {
-                productImgRand = fragranceArray[rand()];
-              } else if (product.productCategory.includes("Hair")) {
-                productImgRand = haircareArray[rand()];
-              } else if (product.productCategory.includes("Skin")) {
-                productImgRand = skincareArray[rand()];
-              } else if (product.productCategory.includes("Shampoo")) {
-                productImgRand = shampooArray[rand()];
-              } else if (product.productCategory.includes("Make")) {
-                productImgRand = makeupArray[rand()];
-              }
-
               return (
                 <Product
                   product={product}
                   key={product.id}
-                  productImgRand={productImgRand}
-                  randomPrice={randomPrice}
+                  productImgRand={product.productImg}
+                  randomPrice={0}
                   setOpen={setOpen}
                 />
               );
