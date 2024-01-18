@@ -4,6 +4,7 @@ import axios from "axios";
 import { useContext, useEffect, useCallback, useState } from "react";
 import Supercluster from "supercluster";
 import iconMarker from "../assets/marker.png";
+import { Link } from "react-router-dom";
 import MagasinContext from "../Context/BornesContext";
 
 function GetIcon() {
@@ -45,12 +46,12 @@ function MagasinMarker() {
     },
   }));
 
-  const supercluster = new Supercluster({ radius: 75, maxZoom: 15 });
+  const supercluster = new Supercluster({ radius: 75, maxZoom: 10 });
   const bounds = [
     -36.64988022329375, -4.915832801313164, 51.328635401706265,
     59.84481485969108,
   ];
-  const [zoom, setZoom] = useState(20);
+  const [zoom, setZoom] = useState(10);
   const [clusters, setClusters] = useState([]);
   const map = useMap();
 
@@ -80,30 +81,23 @@ function MagasinMarker() {
         // every cluster point has coordinates
         const [lat, lng] = cluster.geometry.coordinates;
         // the point may be either a cluster or a crime point
-        const { cluster: isCluster, clusterId } = cluster.properties;
+        const { cluster: isCluster } = cluster.properties;
 
         if (isCluster) {
           return (
-            <Marker
-              key={`cluster-${cluster.id}`}
-              position={[lat, lng]}
-              icon={GetIcon()}
-              eventHandlers={{
-                click: () => {
-                  const expansionZoom = Math.min(
-                    supercluster.getClusterExpansionZoom(clusterId),
-                    15
-                  );
-                  map.setView([lat, lng], expansionZoom, {
-                    animate: true,
-                  });
-                },
-              }}
-            />
+            <Link to="/Magasin">
+              <Marker
+                key={`cluster-${cluster.id}`}
+                position={[lat, lng]}
+                icon={GetIcon()}
+              />
+            </Link>
           );
         }
         return cluster.map((mag) => (
-          <Marker position={[lat, lng]} key={mag.id} icon={GetIcon()} />
+          <Link to="/Magasin">
+            <Marker position={[lat, lng]} key={mag.id} icon={GetIcon()} />
+          </Link>
         ));
       })}
     </div>
