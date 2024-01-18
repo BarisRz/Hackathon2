@@ -65,7 +65,9 @@ function Home() {
   function randPrice() {
     return Math.floor(Math.random() * 20);
   }
-
+  function randItem() {
+    return Math.floor(Math.random() * 115);
+  }
   const [open, setOpen] = useState(false);
   const closeModal = () => setOpen(false);
   const [selectedProduct, setSelectedProduct] = useState({
@@ -74,6 +76,7 @@ function Home() {
     productImgRand: "",
   });
   const [dataProduct, setDataProduct] = useState(firstDataProduct);
+  let randomProduct = firstDataProduct[randItem()];
 
   useEffect(() => {
     const updatedDataProduct = firstDataProduct.map((product) => {
@@ -129,21 +132,27 @@ function Home() {
         </aside>
         <div>
           <Popup open={open} closeOnDocumentClick onClose={closeModal}>
-            <div className="modal">
-              <a className="close" onClick={closeModal}>
+            {/* <a className="close" onClick={closeModal}>
                 &times;
-              </a>
-              Vous avez selectionné ce produit:
-              <div>
-                <img src={selectedProduct.productImgRand} alt="productimg" />
-                {selectedProduct.productName} de la marque{" "}
-                {selectedProduct.brand}.{" "}
-              </div>
-              <div>
-                En cliquand ici vous pourrez trouver le magasin le plus proche
-                de chez vous et bénéficier des conseils de nos experts. Ainsi
-                que d'une remise sur ce produit complémentaire:
-              </div>
+              </a> */}
+            <div className="flex-1 flex items-center justify-center">
+              <img
+                src={selectedProduct.productImgRand}
+                alt="productimg"
+                className="w-9/12"
+              />
+              {/* {selectedProduct.productName} de la marque{" "}
+                {selectedProduct.brand}.{" "} */}
+            </div>
+            <div className="flex-1">
+              En cliquand ici vous pourrez trouver le magasin le plus proche de
+              chez vous et bénéficier des conseils de nos experts. Ainsi que
+              d'une remise sur ce produit complémentaire:{" "}
+              <ul className="flex flex-col items-center justify-center bg-red-500">
+                <li className="font-black">{randomProduct.productName}</li>
+                <li> {randomProduct.brand}</li>
+                <li> {randomProduct.productCategory}</li>
+              </ul>
             </div>
           </Popup>
         </div>
