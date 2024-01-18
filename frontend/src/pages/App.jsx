@@ -5,6 +5,7 @@ import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import LocationContext from "../Context/LocationContext";
 import BornesContext from "../Context/BornesContext";
+import ProductContext from "../Context/ProductContext";
 
 import "../styles/root.scss";
 
@@ -19,14 +20,26 @@ function App() {
     () => ({ magasin, setMagasin }),
     [magasin, setMagasin]
   );
+  const [selectedProduct, setSelectedProduct] = useState({
+    productName: "",
+    brand: "",
+    productImgRand: "",
+  });
+  const value = useMemo(
+    () => ({ selectedProduct, setSelectedProduct }),
+    [selectedProduct, setSelectedProduct]
+  );
+
   return (
     <>
       <Navbar />
-      <BornesContext.Provider value={magasinValue}>
-        <LocationContext.Provider value={positionValue}>
-          <Outlet />
-        </LocationContext.Provider>
-      </BornesContext.Provider>
+      <ProductContext.Provider value={value}>
+        <BornesContext.Provider value={magasinValue}>
+          <LocationContext.Provider value={positionValue}>
+            <Outlet />
+          </LocationContext.Provider>
+        </BornesContext.Provider>
+      </ProductContext.Provider>
       <Footer />
     </>
   );

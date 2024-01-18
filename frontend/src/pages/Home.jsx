@@ -1,14 +1,16 @@
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 /* eslint-disable jsx-a11y/anchor-is-valid */
-import { useState } from "react";
+import { useState, useContext } from "react";
 import Popup from "reactjs-popup";
 import Product from "../components/Product";
 import "reactjs-popup/dist/index.css";
 import dataProduct from "../data/data.json";
+import ProductContext from "../Context/ProductContext";
 import "../styles/home.scss";
 
 function Home() {
+  const { selectedProduct } = useContext(ProductContext);
   const [pageActuel, setPageActuel] = useState(0);
   const [numberPage, setNumberPage] = useState(1);
 
@@ -65,11 +67,7 @@ function Home() {
 
   const [open, setOpen] = useState(false);
   const closeModal = () => setOpen(false);
-  const [selectedProduct, setSelectedProduct] = useState({
-    productName: "",
-    brand: "",
-    productImgRand: "",
-  });
+
   return (
     <div className="max-w-[1200px] flex-col mx-auto">
       <div className="mt-4">
@@ -140,8 +138,6 @@ function Home() {
                   productImgRand={productImgRand}
                   randomPrice={randomPrice}
                   setOpen={setOpen}
-                  setSelectedProduct={setSelectedProduct}
-                  selectedProduct={selectedProduct}
                 />
               );
             })}{" "}

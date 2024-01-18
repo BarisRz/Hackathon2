@@ -1,19 +1,14 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable react/prop-types */
 /* eslint-disable object-shorthand */
-import { useState } from "react";
-import { Link } from "react-router-dom";
+import { useState, useContext } from "react";
 import PropTypes from "prop-types";
-
 import { Rating } from "react-simple-star-rating";
+import { Link } from "react-router-dom";
+import ProductContext from "../Context/ProductContext";
 
-function Product({
-  product,
-  productImgRand,
-  randomPrice,
-  setOpen,
-  setSelectedProduct,
-}) {
+function Product({ product, productImgRand, randomPrice, setOpen }) {
+  const { setSelectedProduct } = useContext(ProductContext);
   const [rating, setRating] = useState(0);
 
   const handleRating = (rate) => {
@@ -27,6 +22,9 @@ function Product({
 
   const popupOpener = () => {
     setOpen((o) => !o);
+    setSelectedProduct(info);
+  };
+  const recupData = () => {
     setSelectedProduct(info);
   };
 
@@ -61,12 +59,15 @@ function Product({
             emptyColor="#333232"
           />
           <p className="font-extrabold">{(randomPrice + 0.9).toFixed(2)} €</p>
+
           <Link
             to="/Map"
             className="bg-black text-white mt-2 p-4 hover:bg-[#e32847] text-center transition w-11/12 font-bold"
+            onClick={recupData}
           >
             Trouver en magasin
           </Link>
+
           <button
             type="button"
             className="bg-black text-white mt-2 p-4 hover:bg-[#e32847] text-center transition w-11/12 font-bold"
