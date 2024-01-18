@@ -19,6 +19,7 @@ function Product({ product, productImgRand, randomPrice, setOpen }) {
     productName: product.productName,
     brand: product.brand,
     productImgRand: product.productImg,
+    price: (product.price + 0.9).toFixed(2),
   };
 
   const popupOpener = () => {

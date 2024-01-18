@@ -2,6 +2,7 @@
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import { useState, useContext, useEffect } from "react";
+import { Link } from "react-router-dom";
 import Popup from "reactjs-popup";
 import Product from "../components/Product";
 import "reactjs-popup/dist/index.css";
@@ -128,26 +129,56 @@ function Home() {
         <div>
           <Popup open={open} closeOnDocumentClick onClose={closeModal}>
             {/* <a className="close" onClick={closeModal}>
-                &times;
-              </a> */}
+                  &times;
+                </a> */}
             <div className="flex-1 flex items-center justify-center">
               <img
                 src={selectedProduct.productImgRand}
                 alt="productimg"
-                className="w-9/12"
+                className="w-6/12"
               />
               {/* {selectedProduct.productName} de la marque{" "}
                 {selectedProduct.brand}.{" "} */}
             </div>
-            <div className="flex-1">
-              En cliquand ici vous pourrez trouver le magasin le plus proche de
-              chez vous et bénéficier des conseils de nos experts. Ainsi que
-              d'une remise sur ce produit complémentaire:{" "}
-              <ul className="flex flex-col items-center justify-center bg-red-500">
-                <li className="font-black">{randomProduct.productName}</li>
-                <li> {randomProduct.brand}</li>
-                <li> {randomProduct.productCategory}</li>
-              </ul>
+            <div className="flex-1 flex justify-center px-10 flex-col">
+              <p className="font-bold text-3xl">
+                {selectedProduct.productName}
+              </p>
+              <p className="text-xs text-gray-500 pt-2">
+                {selectedProduct.productName}
+              </p>
+              <p className="text-base font-bold text-gray-500 pt-2">
+                {selectedProduct.price}€
+              </p>
+              <p className="text-sm text-gray-700 pt-2">
+                Ne manquez pas cette opportunité unique ! Cliquez sur le bouton
+                ci-dessous pour trouver le magasin le plus proche de chez vous.
+                Nos experts sont prêts à vous fournir des conseils personnalisés
+                et vous bénéficierez d'une remise spéciale sur ce produit
+                complémentaire. Agissez maintenant et découvrez ce que nous
+                avons à offrir !
+              </p>
+              <div className="flex items-center pt-8 flex-col">
+                <Link
+                  to="/Map"
+                  className="bg-black text-white mt-2 p-4 hover:bg-[#e32847] text-center transition w-11/12 font-bold"
+                >
+                  Trouver en magasin
+                </Link>
+                {/* <p className="w-10/12 py-2 text-xs">
+                  Nous avons sélectionné ces produits spécialement pour vous, en
+                  tenant compte de vos préférences et de vos besoins. Nous
+                  pensons qu'ils pourraient être parfaits pour vous. Jetez un
+                  œil et découvrez ce que nous avons à offrir !
+                </p>
+                <ul className="p-4 transition w-full font-bold text-center flex flex-col gap-2 text-white">
+                  <li className="font-black bg-black">
+                    {randomProduct.productName}
+                  </li>
+                  <li className="bg-black"> {randomProduct.brand}</li>
+                  <li className="bg-black"> {randomProduct.productCategory}</li>
+                </ul> */}
+              </div>
             </div>
           </Popup>
         </div>
@@ -156,7 +187,11 @@ function Home() {
             .slice(pageActuel, pageActuel + taillepage)
             .map((product) => {
               return (
-                <Product product={product} key={product.id} setOpen={setOpen} />
+                <Product
+                  key={product.productId}
+                  product={product}
+                  setOpen={setOpen}
+                />
               );
             })}{" "}
           <div className="mx-auto w-full flex justify-center my-8">
