@@ -24,6 +24,7 @@ function App() {
     productName: "",
     brand: "",
     productImgRand: "",
+    price: "",
   });
   const value = useMemo(
     () => ({ selectedProduct, setSelectedProduct }),

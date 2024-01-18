@@ -66,7 +66,7 @@ function Magasin() {
     productImgRand = makeupArray[1];
   }
   return (
-    <div>
+    <div className="">
       Vous avez sélectionné ce magasin. Merci de remplir ce formulaire afin que
       nos équipes puissent préparer vos produits. Profitez d'une remise de 50%
       sur un produit complémentaire:
