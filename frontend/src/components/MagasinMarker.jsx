@@ -4,7 +4,6 @@ import axios from "axios";
 import { useContext, useEffect, useCallback, useState } from "react";
 import Supercluster from "supercluster";
 import iconMarker from "../assets/marker.png";
-import { Link } from "react-router-dom";
 import MagasinContext from "../Context/BornesContext";
 
 function GetIcon() {
@@ -85,19 +84,29 @@ function MagasinMarker() {
 
         if (isCluster) {
           return (
-            <Link to="/Magasin">
-              <Marker
-                key={`cluster-${cluster.id}`}
-                position={[lat, lng]}
-                icon={GetIcon()}
-              />
-            </Link>
+            <Marker
+              key={`cluster-${cluster.id}`}
+              position={[lat, lng]}
+              icon={GetIcon()}
+              eventHandlers={{
+                click: () => {
+                  window.location.href = "/Magasin";
+                },
+              }}
+            />
           );
         }
         return cluster.map((mag) => (
-          <Link to="/Magasin">
-            <Marker position={[lat, lng]} key={mag.id} icon={GetIcon()} />
-          </Link>
+          <Marker
+            position={[lat, lng]}
+            key={mag.id}
+            icon={GetIcon()}
+            eventHandlers={{
+              click: () => {
+                window.location.href = "/Magasin";
+              },
+            }}
+          />
         ));
       })}
     </div>

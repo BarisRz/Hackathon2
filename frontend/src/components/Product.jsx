@@ -18,7 +18,7 @@ function Product({ product, productImgRand, randomPrice, setOpen }) {
   const info = {
     productName: product.productName,
     brand: product.brand,
-    productImgRand: productImgRand,
+    productImgRand: product.productImg,
   };
 
   const popupOpener = () => {
@@ -33,7 +33,7 @@ function Product({ product, productImgRand, randomPrice, setOpen }) {
     <div className="w-1/3 h-[500px] p-2 font-montserrat">
       <div className="h-full w-full grid grid-rows-2">
         <img
-          src={productImgRand}
+          src={product.productImg}
           alt="produit de beauté"
           className="mx-auto h-[200px]"
         />
@@ -48,7 +48,7 @@ function Product({ product, productImgRand, randomPrice, setOpen }) {
             onClick={handleRating}
             className="rating scale-50"
             SVGclassName="inline-block"
-            initialValue={3}
+            initialValue={product.star}
             transition
             fillColorArray={[
               "#e22746",
@@ -59,7 +59,7 @@ function Product({ product, productImgRand, randomPrice, setOpen }) {
             ]}
             emptyColor="#333232"
           />
-          <p className="font-extrabold">{(randomPrice + 0.9).toFixed(2)} €</p>
+          <p className="font-extrabold">{(product.price + 0.9).toFixed(2)} €</p>
 
           <Link
             to="/Map"
